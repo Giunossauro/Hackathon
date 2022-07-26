@@ -1,6 +1,9 @@
 import http from "http";
 import express, { Express } from "express";
 import routes from "./apps/api/routes";
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import path from 'path';
 
 const router: Express = express();
 
@@ -8,6 +11,13 @@ const router: Express = express();
 router.use(express.urlencoded({ extended: false }));
 /** Takes care of JSON data */
 router.use(express.json());
+
+router.use(logger('dev'));
+router.use(express.urlencoded({ extended: false }));
+router.use(cookieParser())
+router.use(express.static(path.join(__dirname, 'public')))
+
+
 
 router.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
