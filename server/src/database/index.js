@@ -7,6 +7,6 @@ module.exports = knex({
     user : 'postgres',
     password : 'SenhadoGiu!',
     database : 'Hackathon',
-    port: '5432'
+    port: '5432' //
   }
 });
