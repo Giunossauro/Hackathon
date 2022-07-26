@@ -30,7 +30,7 @@ function App() {
       }  
     }
     getData();
-  }, []);
+  }, [numbers]);
 
   return ( 
     <div className="App">
@@ -41,9 +41,9 @@ function App() {
           <div>{`There is a problem fetching the post data - ${error}`}</div>
         )}
         <p>
-          <input value={numbers[0]} onInput={setNumbers([e.target.va])} />
+          <input value={numbers[0]} onInput={(e)=>setNumbers([e.target.value, numbers[1]])} key={0} />
           +
-          <input value={numbers[1]} />
+          <input value={numbers[1]} onInput={(e)=>setNumbers([numbers[0],e.target.value])} key={1} />
           =
           <strong>{data && data.result}</strong>!!
         </p>
