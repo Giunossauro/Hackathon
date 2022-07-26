@@ -16,3 +16,5 @@ npm start
 ```
 npm run dev
 ```
+
+#### Melhor com 2 terminais um em cada diretório (client/server)
