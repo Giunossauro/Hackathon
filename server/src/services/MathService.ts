@@ -1,5 +1,5 @@
 export class MathService {
-  constructor() {}
+  constructor() { }
 
   getSum = (x: number, y: number) => {
     return x + y;
