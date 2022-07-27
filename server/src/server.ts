@@ -4,20 +4,20 @@ import routes from "./apps/api/routes";
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import path from 'path';
+import cors from 'cors';
+import connection from './database/connection';
 
 const router: Express = express();
 
-/** Parse the request */
 router.use(express.urlencoded({ extended: false }));
-/** Takes care of JSON data */
+router.use(cors());
 router.use(express.json());
+router.set("db", connection);
 
 router.use(logger('dev'));
 router.use(express.urlencoded({ extended: false }));
 router.use(cookieParser())
 router.use(express.static(path.join(__dirname, 'public')))
-
-
 
 router.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
