@@ -1,0 +1,30 @@
+.pointer:hover{
+    cursor: alias;
+}
+
+.BackToTopBtn{
+    position: sticky;
+    text-align: flex-end;
+    font-size: 500%;
+    left: 0;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.SobreNosProjeto{
+    background-color: aqua;
+    border: 1px solid blueviolet;
+    margin: 5vw;
+    padding: 2vw;
+    text-align: justify;
+}
+
+.SobreNosAlunos{
+    background-color: aqua;
+    border: 1px solid blueviolet;
+    margin: 5vw 5vw 5vw 30vw;
+    padding: 2vw;
+    text-align: justify;
+}
+

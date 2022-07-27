@@ -14,7 +14,6 @@ export class TeacherService {
 	}
 
 	addTeacher = async (nome: String, cpf: String, email: String, senha: String, excluido: Boolean) => {
-
 		const newUser = {
 			nome: nome,
 			cpf: cpf,

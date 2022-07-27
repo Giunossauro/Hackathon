@@ -28,7 +28,6 @@ export class TeacherController {
 
 		//valida se é número
 
-
 		return res.status(200).json({
 			result: await this.#service.getTeacherById(Number(id))
 		})
