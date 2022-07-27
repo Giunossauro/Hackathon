@@ -5,7 +5,6 @@ export class TeacherService {
 
 	getTeachers = async () => {
 		const allTeachers = await db.default.select("*").from('professores');
-
 		return allTeachers;
 	};
 
