@@ -1,17 +1,17 @@
 import * as db from '../database/connection'
 
-export class StudentService {
+export class CourseService {
 	constructor() { }
 
-	getStudents = () => {
+	getCourses = () => {
 		return db.default.select("*").from('alunos');
 	};
 
-	getStudentById = (studentId: number) => {
-		return db.default('alunos').where({ id: Number(studentId) });
+	getCourseById = (courseId: number) => {
+		return db.default('alunos').where({ id: Number(courseId) });
 	};
 
-	addStudent = async (nome: string, cpf: string, email: string, senha: string, excluido: boolean) => {
+	addCourse = async (nome: string, cpf: string, email: string, senha: string, excluido: boolean) => {
 		const newUser = {
 			nome: nome,
 			cpf: cpf,
