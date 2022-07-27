@@ -1,5 +1,5 @@
-import { Link, animateScroll as scroll } from "react-scroll";
-import {NavbarLandingPageCSS} from "../styles/NavbarLandingPageCSS.css";
+import { Link} from "react-scroll";
+import {LandingPageCSS} from "../styles/LandingPageCSS.css";
 
 
 const NavbarLandingPage= ()=>{
