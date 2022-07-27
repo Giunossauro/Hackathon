@@ -1,1 +1,6 @@
-export class UserService { }
+export class UserService {
+	getTeste() {
+
+		console.log("teste")
+	}
+}
