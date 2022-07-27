@@ -2,11 +2,12 @@ import { Request, Response, NextFunction } from "express";
 import { StudentService } from "../../../services/StudentService";
 
 interface StudentRequest {
-	nome: String,
-	cpf: String,
-	email: String,
-	senha: String,
-	excluido: Boolean
+	id: number,
+	nome: string,
+	cpf: string,
+	email: string,
+	senha: string,
+	excluido: boolean
 }
 
 export class StudentController {
@@ -16,15 +17,37 @@ export class StudentController {
 		this.#service = new StudentService();
 	}
 
-	getStudents = (req: Request<StudentRequest>, res: Response, next: NextFunction) => {
-		const { studentId } = req.query;
-		const id: number = Number(studentId);
-		const student = this.#service.getStudent(id);
-
+	getStudents = async (_req: Request<StudentRequest>, res: Response, _next: NextFunction) => {
 		return res.status(200).json({
-			result: student
+			result: await this.#service.getStudents()
 		});
 	};
 
-	addStudents = () => { };
+	getStudentById = async (req: Request<StudentRequest>, res: Response, _next: NextFunction) => {
+		const { studentId } = req.query;
+		const id: number = Number(studentId);
+
+		if (!isNaN(id)){
+			return res.status(200).json({
+				result: await this.#service.getStudentById(id)
+			});
+		}
+		return res.status(404).json({result: "Aluno não encontrado."});
+	};
+
+	addStudents = async (req: Request<StudentRequest>, res: Response, next: NextFunction) => {
+		const { nome, cpf, email, senha, excluido = false } = req.body;
+
+		//valida tipos dos campos
+
+		return res.status(200).json({
+			result: await this.#service.addStudent(
+				nome,
+				cpf,
+				email,
+				senha,
+				excluido
+			)
+		});
+	}
 }
