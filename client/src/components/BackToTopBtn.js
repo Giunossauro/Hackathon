@@ -1,12 +1,12 @@
 import { Link, animateScroll as scroll } from "react-scroll";
 
-const NavbarLandingPage= ()=>{
+const BackToTopBtn= ()=>{
     return(
-
-
+<></>
+        
         
 )
 }
 
 
-export default NavbarLandingPage
+export default BackToTopBtn
