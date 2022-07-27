@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import process from 'process';
 dotenv.config();
 
-module.exports = knex({
+const connection = knex({
 	client: 'pg',
 	connection: {
 		host: process.env.DB_HOST,
@@ -13,3 +13,5 @@ module.exports = knex({
 		port: Number(process.env.DB_PORT)
 	}
 });
+
+export default connection;

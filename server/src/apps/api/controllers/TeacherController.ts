@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { TeacherService } from "../../../services/TeacherServices";
 
 interface TeacherRequest {
+	id: Number,
 	nome: String,
 	cpf: String,
 	email: String,
@@ -16,30 +17,30 @@ export class TeacherController {
 		this.#service = new TeacherService();
 	}
 
-	getTeachers = (req: Request<TeacherRequest>, res: Response, next: NextFunction) => {
+	getTeachers = async (req: Request<TeacherRequest>, res: Response, next: NextFunction) => {
 		return res.status(200).json({
-			result: this.#service.getTeachers()
+			result: await this.#service.getTeachers()
 		});
 	};
 
-	getTeacherById = (req: Request<TeacherRequest>, res: Response, next: NextFunction) => {
-		const { id } = req.query;
+	getTeacherById = async (req: Request<TeacherRequest>, res: Response, next: NextFunction) => {
+		const { id } = req.params;
 
 		//valida se é número
 
 
 		return res.status(200).json({
-			result: this.#service.getTeacherById(Number(id))
+			result: await this.#service.getTeacherById(Number(id))
 		})
 	}
 
-	addTeachers = (req: Request<TeacherRequest>, res: Response, next: NextFunction) => {
-		const { nome, cpf, email, senha, excluido = false } = req.query;
+	addTeachers = async (req: Request<TeacherRequest>, res: Response, next: NextFunction) => {
+		const { nome, cpf, email, senha, excluido = false } = req.body;
 
 		//valida tipos dos campos
 
 		return res.status(200).json({
-			result: this.#service.addTeacher(
+			result: await this.#service.addTeacher(
 				String(nome),
 				String(cpf),
 				String(email),

@@ -1,15 +1,31 @@
+import * as db from '../database/connection'
+
 export class TeacherService {
 	constructor() { }
 
-	getTeachers = () => {
-		return true;
+	getTeachers = async () => {
+		const allTeachers = await db.default.select("*").from('professores');
+
+		return allTeachers;
 	};
 
-	getTeacherById = (id: Number) => {
-		return id;
+	getTeacherById = async (id: Number) => {
+		const teacherById = await db.default.select("*").from('professores').where({ id: id });
+		return teacherById;
 	}
 
-	addTeacher = (nome: String, cpf: String, email: String, senha: String, excluido: Boolean) => {
-		return { nome, cpf, email, senha, excluido };
+	addTeacher = async (nome: String, cpf: String, email: String, senha: String, excluido: Boolean) => {
+
+		const newUser = {
+			nome: nome,
+			cpf: cpf,
+			email: email,
+			senha: senha,
+			excluido: excluido
+		}
+
+		await db.default("professores").insert(newUser)
+
+		return newUser;
 	}
 }
