@@ -4,7 +4,7 @@ import routes from "./apps/api/routes";
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import path from 'path';
-import cors from 'cors'
+import cors from 'cors';
 import connection from './database/connection';
 
 const router: Express = express();
