@@ -6,6 +6,8 @@ const _controller = new CourseController();
 
 router.get("/cursos", _controller.getCourses);
 router.get("/cursos/:id", _controller.getCourseById);
-router.post("/cursos", _controller.addCourses);
+router.post("/cursos", _controller.addCourse);
+router.post("/cursos/:id", _controller.updateCourse);
+router.post("/cursos/:id", _controller.removeCourse);
 
 export = router;
