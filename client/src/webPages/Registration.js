@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import Navbar from "../components/Navbar.js"
 import { Link } from "react-router-dom"
 import "../styles/Registration.css";
 import { styled } from '@mui/material/styles';
@@ -15,7 +16,6 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
-    padding: theme.spacing(1),
     textAlign: 'center',
     color: theme.palette.text.secondary,
 }));
@@ -31,32 +31,26 @@ const Registration = () => {
     return (
         <>
             <body className="teste">
-                <nav>
-                    <div class="navbar">
 
-                        <Link to="/home"> CODE OCEAN </Link>
+            <Navbar />
 
-                        <Link to="/home"> Sobre nós </Link>
-
-                    </div>
-                </nav>
                 <div className="container">
                     <h1 className="Title">Cadastre-se</h1>
-                    <hr style={{ color: "white" }}></hr>
-                    <br />
-                    <Box sx={{ flexGrow: 1 }}>
+                    <hr style={{ color: "white", marginBottom:"5vh"}}></hr>
+
+                    <Box sx={{ flexGrow: 1 }} className="teste-flex">
                         <Grid container spacing={2}>
-                            <Grid item xs={6}>
+                            <Grid item xs={12}
+                            >
                                 <ToggleButtonGroup
                                     color="primary"
-                                    style={{ backgroundColor: "white" }}
-                                    className="teste-flex"
+                                    style={{  flexWrap:"wrap", justifyContent:"center" }}
                                     value={alignment}
                                     exclusive
                                     onChange={handleChange}
                                 >
-                                    <ToggleButton value="aluno">Aluno</ToggleButton>
-                                    <ToggleButton value="professor">Professor</ToggleButton>
+                                    <ToggleButton style={{backgroundColor: "white"}} value="aluno">Aluno</ToggleButton>
+                                    <ToggleButton style={{backgroundColor: "white"}} value="professor">Professor</ToggleButton>
                                 </ToggleButtonGroup>
                             </Grid>
                             <Grid item xs={0} md={12}>
@@ -70,7 +64,6 @@ const Registration = () => {
                             </Grid>
                             <Grid item xs={6}>
                                 <Item><TextField
-
                                     required
                                     id="outlined-required1"
                                     label="CPF"
@@ -79,7 +72,6 @@ const Registration = () => {
                             </Grid>
                             <Grid item xs={6} md={6}>
                                 <Item><TextField
-
                                     required
                                     id="outlined-required2"
                                     label="Email"
@@ -88,7 +80,6 @@ const Registration = () => {
                             </Grid>
                             <Grid item xs={6}>
                                 <Item><TextField
-
                                     required
                                     id="outlined-required3"
                                     label="Telefone"
@@ -123,8 +114,10 @@ const Registration = () => {
                                     placeholder=""
                                 /></Item>
                             </Grid>
-                            <Button className="cadastro" variant="contained">Cadastrar</Button>
-
+                            <Grid item xs={12}>
+                                <Button className="cadastroBtn" variant="contained">Cadastrar</Button>
+                            </Grid>
+                            
                         </Grid>
 
                     </Box>

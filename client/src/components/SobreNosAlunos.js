@@ -12,7 +12,7 @@ const SobreNosAlunos= ()=>{
     return(
 <>
 <img src={ImgEduComBalao} alt="Edu Cação"
-style={{width:"60vh", float:"left", margin:"10vw 1vw 0 7vw"}}
+style={{width:"30vw", float:"left", margin:"10vw 1vw 0 7vw"}}
 />
 
 

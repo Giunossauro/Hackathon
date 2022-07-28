@@ -3,11 +3,11 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LandingPage from './webPages/LandingPage';
 import Login from './webPages/Login';
 import Registration from './webPages/Registration';
-import Profile from './webPages/Profile';
-import ProfileUsers from './webPages/ProfileUsers';
-import ProfileTeachers from './webPages/ProfileTeachers';
-import ProfileModules from './webPages/ProfileModules';
-import Search from './webPages/Search.js';
+import Search from './webPages/Search';
+import SearchUsers from './webPages/SearchUsers';
+import SearchTeachers from './webPages/SearchTeachers';
+import SearchModules from './webPages/SearchModules';
+
 
 const Router = () => {
 	return (
@@ -17,12 +17,12 @@ const Router = () => {
 				<Route path='/home' element={<LandingPage />} />
 				<Route path='/login' element={<Login />} />
 				<Route path='/registration' element={<Registration />} />
-				<Route path='/profile' element={<Profile />}>
-                    <Route path='/profile/users' element={<ProfileUsers />} />
-                    <Route path='/profile/teachers' element={<ProfileTeachers />} />
-                    <Route path='/profile/modules' element={<ProfileModules />} />
+				<Route path='/search' element={<Search />}>
+                    <Route path='/search/users' element={<SearchUsers />} />
+                    <Route path='/search/teachers' element={<SearchTeachers />} />
+                    <Route path='/search/modules' element={<SearchModules />} />
                 </Route>
-                <Route path='/search' element={<Search />} />
+               {/*  <Route path='/search' element={<Search />} /> */}
 			</Routes>
 		</BrowserRouter>
 	)
