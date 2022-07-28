@@ -15,7 +15,7 @@ export class TeacherService {
 		return { status: 200, msg: teacherById };
 	}
 
-	addTeacher = async (nome: String, email: String, senha: String, telefone: Number) => {
+	addTeacher = async (nome: String, email: String, senha: String, telefone: String) => {
 		const findTeacher = await db.default.select("*").from('professores').where({ email: email });
 
 		if (findTeacher.length > 0) {
@@ -37,7 +37,7 @@ export class TeacherService {
 		return { status: 201, msg: newUser }
 	}
 
-	updateTeacher = async (id: Number, nome: String, email: String, senha: String, telefone: Number) => {
+	updateTeacher = async (id: Number, nome: String, email: String, senha: String, telefone: String) => {
 		const findTeacher = await db.default.select("*").from('professores').where({ id: id });
 
 		if (findTeacher.length <= 0) {
@@ -56,7 +56,7 @@ export class TeacherService {
 			nome: nome != "" ? nome : findTeacher[0].nome,
 			email: email != "" ? email : findTeacher[0].email,
 			senha: senha != "" ? newHashPass : findTeacher[0].senha,
-			telefone: telefone != 0 ? Number(telefone) : Number(findTeacher[0].telefone),
+			telefone: telefone != "" ? telefone : findTeacher[0].telefone,
 		}
 
 		await db.default("professores").where({ id: id }).update(updatedUser);

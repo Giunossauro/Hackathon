@@ -15,7 +15,7 @@ export class StudentService {
 		return { status: 200, msg: StudentById };
 	}
 
-	addStudent = async (nome: String, email: String, senha: String, telefone: Number) => {
+	addStudent = async (nome: String, email: String, senha: String, telefone: String) => {
 		const findStudent = await db.default.select("*").from('alunos').where({ email: email });
 
 		if (findStudent.length > 0) {
@@ -37,7 +37,7 @@ export class StudentService {
 		return { status: 201, msg: newUser }
 	}
 
-	updateStudent = async (id: Number, nome: String, email: String, senha: String, telefone: Number) => {
+	updateStudent = async (id: Number, nome: String, email: String, senha: String, telefone: String) => {
 		const findStudent = await db.default.select("*").from('alunos').where({ id: id });
 
 		if (findStudent.length <= 0) {
@@ -56,7 +56,7 @@ export class StudentService {
 			nome: nome != "" ? nome : findStudent[0].nome,
 			email: email != "" ? email : findStudent[0].email,
 			senha: senha != "" ? newHashPass : findStudent[0].senha,
-			telefone: telefone != 0 ? Number(telefone) : Number(findStudent[0].telefone),
+			telefone: telefone != "" ? telefone : findStudent[0].telefone,
 		}
 
 		await db.default("alunos").where({ id: id }).update(updatedUser);
