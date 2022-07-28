@@ -4,22 +4,21 @@ import NavbarLandingPage from "../components/NavbarLandingPage.js"
 import BackToTopBtn from "../components/BackToTopBtn.js"
 import SobreNosProjeto from "../components/SobreNosProjeto"
 import SobreNosAlunos from "../components/SobreNosAlunos"
+import Logo from "../components/Logo"
 
 const Login = () => {
     return (
  <>
  <NavbarLandingPage /> 
 
-        <div>Home</div>
+<Logo />
+        
 
-        <Link to="/registration"> Registre-se </Link>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-        <div name='SobreNos'>
-            um monte de coisa sobre nós
-        </div>
+        
+    <h2 name='SobreNos' style={{textAlign:"center", marginTop:"30vh"}}>
+            Sobre Nós
+        <hr style={{width:"50%", color:"rgb(0, 94, 28)"}}/>
+            </h2>
 
         <SobreNosProjeto />
         <SobreNosAlunos />
@@ -27,8 +26,7 @@ const Login = () => {
 
         <BackToTopBtn /> 
 
-
-</>
+        </>
 
 
 

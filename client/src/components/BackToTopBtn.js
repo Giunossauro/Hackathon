@@ -1,5 +1,5 @@
 import { animateScroll as scroll } from "react-scroll";
-import {LandingPageCSS} from "../styles/LandingPageCSS.css";
+import "../styles/LandingPageCSS.css";
 
 
 const BackToTopBtn= ()=>{

@@ -1,4 +1,4 @@
-import {LandingPageCSS} from "../styles/LandingPageCSS.css";
+import "../styles/LandingPageCSS.css";
 
 const SobreNosProjeto= ()=>{
     return(

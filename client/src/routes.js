@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import LandingPage from './webPages/LandingPage';
+import Login from './webPages/Login';
 import Registration from './webPages/Registration';
 import Profile from './webPages/Profile';
 import ProfileUsers from './webPages/ProfileUsers';
@@ -14,6 +15,7 @@ const Router = () => {
 			<Routes>
 				<Route path='/' exact element={<Navigate to='/home' replace />} />
 				<Route path='/home' element={<LandingPage />} />
+				<Route path='/login' element={<Login />} />
 				<Route path='/registration' element={<Registration />} />
 				<Route path='/profile' element={<Profile />}>
                     <Route path='/profile/users' element={<ProfileUsers />} />

@@ -1,11 +1,11 @@
 import { Link} from "react-scroll";
-import {LandingPageCSS} from "../styles/LandingPageCSS.css";
+import "../styles/LandingPageCSS.css";
 
 
 const NavbarLandingPage= ()=>{
     return(
 
-    <div
+    <div className="navbar"
     style={{display:"flex", justifyContent:"flex-end"}}
     >
 
