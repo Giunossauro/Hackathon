@@ -4,9 +4,9 @@ import { StudentService } from "../../../services/StudentService";
 interface StudentRequest {
 	id: Number,
 	nome: String,
-	cpf: String,
 	email: String,
 	senha: String,
+	telefone: String,
 	excluido: Boolean
 }
 
@@ -40,7 +40,7 @@ export class StudentController {
 	addStudents = async (req: Request<StudentRequest>, res: Response, next: NextFunction) => {
 		const { nome, email, senha, telefone } = req.body;
 
-		if (nome == "" || email == "" || senha == "" || telefone == null || telefone == "" || telefone == 0 || !Number(telefone)) {
+		if (nome == "" || email == "" || senha == "" || telefone == "") {
 			return res.status(400).json({ result: "ERRO: Confira e preencha todos os campos." });
 		}
 
@@ -54,7 +54,7 @@ export class StudentController {
 			return res.status(400).json({ result: "ERRO: Padrão de email inválido." });
 		}
 
-		const result = await this.#service.addStudent(String(nome), String(email), String(senha), Number(telefone));
+		const result = await this.#service.addStudent(String(nome), String(email), String(senha), String(telefone));
 
 
 		return res.status(result.status).json({
@@ -64,7 +64,7 @@ export class StudentController {
 
 	updateStudent = async (req: Request<StudentRequest>, res: Response, next: NextFunction) => {
 		const { id } = req.params;
-		const { nome = "", email = "", senha = "", telefone = 0 } = req.body;
+		const { nome = "", email = "", senha = "", telefone = "" } = req.body;
 
 		if (!id || !Number(id)) {
 			return res.status(400).json({ result: "ERRO: ID inválido." });
@@ -80,11 +80,7 @@ export class StudentController {
 			return res.status(400).json({ result: "ERRO: Email inválido." });
 		}
 
-		if (telefone != 0 && !Number(telefone)) {
-			return res.status(400).json({ result: "ERRO: Telefone inválido." });
-		}
-
-		const result = await this.#service.updateStudent(Number(id), String(nome), String(email), String(senha), Number(telefone));
+		const result = await this.#service.updateStudent(Number(id), String(nome), String(email), String(senha), String(telefone));
 
 		return res.status(result.status).json({
 			result: result.msg
