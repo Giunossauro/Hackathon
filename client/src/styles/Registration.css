@@ -1,39 +1,10 @@
-.teste {
+/* .teste {
     background: linear-gradient(#C0ECDB, #00A8E0);
     background-color: rgb(4, 61, 92);
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
-}
-
-.navbar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-
-    overflow: hidden;
-    background-color: rgb(4, 61, 92);
-    display: flex;
-    justify-content: end;
-}
-
-.navbar div {
-
-    font-size: 16px;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-
-
-.navbar a:hover,
-.dropdown:hover .dropbtn {
-    background-color: rgb(32, 169, 179);
-}
-
+} */
 
 .container {
     background-color: rgb(4, 61, 92);
@@ -46,25 +17,19 @@
 
 .Title {
     font-weight: bold;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color: white;
-    position: relative;
-    margin-bottom: 3%;
-    margin-top: 1%;
 }
 
-.teste-flex {
-    position: relative;
+/* .teste-flex {
+    display: flex;
     justify-content: space-evenly;
     align-items: center;
-    left: 50%;
     flex-wrap: wrap;
-    /*responsividade*/
+    text-align: center;
 }
-
-.cadastro {
+ */
+/* .cadastroBtn {
     position: relative;
-    left: 40%;
     top: 2vw;
     color: black
-}
+} */
