@@ -1,5 +1,41 @@
+.backGroundDegrade{
+ 
+    background:linear-gradient(#C0ECDB,#00A8E0);
+    background-color:rgb(4, 61, 92); /*this your primary color*/ 
+/*     background:linear-gradient(rgb(0, 255, 145),blue);
+    background-color:rgb(0, 255, 145); /*this your primary color
+    background-image: linear-gradient(180deg, rgb(0, 255, 145), blue);
+    */  
+    background-repeat: no-repeat;
+    background-size: cover; 
+    height: 100%; 
+    
+}
+
+.navbar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    overflow: hidden;
+    background-color: rgb(4, 61, 92);
+    padding: 2vw ;
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+
 .pointer:hover{
     cursor: alias;
+}
+
+.LogoComImg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10vw 0 2vw 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: xxx-large;
 }
 
 .BackToTopBtn{
@@ -13,18 +49,38 @@
 }
 
 .SobreNosProjeto{
-    background-color: aqua;
-    border: 1px solid blueviolet;
-    margin: 5vw;
+    border-radius: 25px;
+    
+    border: 1px solid rgb(0, 94, 28);
+    margin: 1vw 5vw 1vw 5vw;
     padding: 2vw;
     text-align: justify;
 }
 
+/* .SobreNosAlunos{
+    display: flex;
+} */
+
 .SobreNosAlunos{
-    background-color: aqua;
-    border: 1px solid blueviolet;
-    margin: 5vw 5vw 5vw 30vw;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+   
+    
+    margin: 1vw 5vw 5vw 40vw;
     padding: 2vw;
     text-align: justify;
+}
+
+.AlunoComFoto{
+    margin: 2vw 1vw;
+    display: flex;
+}
+
+.AlunoComInfo{
+    margin-left: 2vw;
+    display: flex;
+    flex-direction: column;
+   
 }
 
