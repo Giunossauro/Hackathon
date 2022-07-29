@@ -7,8 +7,10 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import CarroselLandingPage from '../components/CarroselLandingPage.js'
 import { Link } from "react-router-dom";
 
+// import { useState, createContext } from 'React'
 
-
+// const [option, setOption] = useState('')
+// const optionContext = createContext({option, setOption})
 
 const Logo = () => {
 
@@ -33,23 +35,23 @@ const Logo = () => {
       <div style={{ textAlign: "center", margin: "1vw", color: "#006064" }}>
         <ButtonGroup variant="outlined" aria-label="outlined button group">
           <Button variant="contained">
-             <Link activeClass="active" to="/search" spy={true} style={{textDecoration:"none", color:"white"}}>
+             <Link activeClass="active" to="/search" state="javascript" spy={true} style={{textDecoration:"none", color:"white"}}>
             JavaScript
           </Link></Button>
           <Button variant="contained">      
-              <Link activeClass="active" to="/search" spy={true} style={{textDecoration:"none", color:"white"}}>
+              <Link activeClass="active" to="/search" state="html" spy={true} style={{textDecoration:"none", color:"white"}}>
             Html+CSS
           </Link></Button>
           <Button variant="contained">        
-            <Link activeClass="active" to="/search" spy={true} style={{textDecoration:"none", color:"white"}}>
+            <Link activeClass="active" to="/search" state="react" spy={true} style={{textDecoration:"none", color:"white"}}>
             React
           </Link></Button>
           <Button variant="contained">    
-                <Link activeClass="active" to="/search" spy={true} style={{textDecoration:"none", color:"white"}}>
+                <Link activeClass="active" to="/search" state="node" spy={true} style={{textDecoration:"none", color:"white"}}>
             Node.js
           </Link></Button>
           <Button variant="contained">      
-              <Link activeClass="active" to="/search" spy={true} style={{textDecoration:"none", color:"white"}}>
+              <Link activeClass="active" to="/search" state="programacao" spy={true} style={{textDecoration:"none", color:"white"}}>
             Iniciante? Comece aqui
           </Link></Button>
         </ButtonGroup>

@@ -16,6 +16,7 @@ export class StudentService {
 				msg: allStudents
 			};
     } catch (_e) {
+      console.log(_e)
       return {
         status: 500,
         msg: "ERRO: Falha no servidor ao consultar os alunos."
