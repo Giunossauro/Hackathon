@@ -24,7 +24,7 @@ export class CourseController {
   };
 
   getCourseById = async (req: Request<CourseRequest>, res: Response, _next: NextFunction) => {
-    const { id } = req.query;
+    const { id } = req.params;
     const courseId: number = Number(id);
 
     if (courseId) {
@@ -35,6 +35,19 @@ export class CourseController {
 			});
     }
     return res.status(400).json({ result: "ERRO: Id do curso inválido." });
+  };
+
+  getCoursesByName = async (req: Request, res: Response, _next: NextFunction) => {
+    const { query } = req.params;
+
+    if (query) {
+      const result = await this.#service.getCoursesByName(query);
+
+      return res.status(result.status).json({
+        result: result.msg
+			});
+    }
+    return res.status(400).json({ result: "ERRO: Nome do curso não informado." });
   };
 
   addCourse = async (req: Request<CourseRequest>, res: Response, _next: NextFunction) => {
@@ -74,14 +87,17 @@ export class CourseController {
       return res.status(400).json({ result: "ERRO: ID inválido." });
     }
 
-    // 05:25 - encerrando por hj
-    /* if (nome.length > 60 || email.length > 60 || senha.length > 500) {
+    if (!professorId || !Number(professorId)) {
+      return res.status(400).json({ result: "ERRO: ID de professor inválido." });
+    }
+
+    if (nome.length > 60) {
       return res.status(400).json({ result: "ERRO: Número máximo de caracteres excedido." });
     }
 
-    if (email != "" && !emailPattern) {
-      return res.status(400).json({ result: "ERRO: Email inválido." });
-    } */
+    if (!horasTotais || !Number(horasTotais)) {
+      return res.status(400).json({ result: "ERRO: Valor inválido para duração do curso" });
+    }
 
     const result = await this.#service.updateCourse(Number(id), Number(professorId), String(nome), Number(horasTotais));
 

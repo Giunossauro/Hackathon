@@ -35,7 +35,39 @@ export class StudentController {
 		return res.status(result.status).json({
 			result: result.msg
 		})
-	}
+	};
+
+  getStudentsByName = async (req: Request, res: Response, _next: NextFunction) => {
+    const { query } = req.params;
+
+    if (query) {
+      const result = await this.#service.getStudentsByName(query);
+
+      return res.status(result.status).json({
+        result: result.msg
+			});
+    }
+    return res.status(400).json({ result: "ERRO: Nome do aluno não informado." });
+  };
+
+  getStudentByEmail = async (req: Request, res: Response, _next: NextFunction) => {
+    const { query } = req.params;
+
+    if (query) {
+			const emailPattern = query.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g);
+	
+			if (!emailPattern) {
+				return res.status(400).json({ result: "ERRO: Padrão de email inválido." });
+			}
+
+      const result = await this.#service.getStudentByEmail(query);
+
+      return res.status(result.status).json({
+        result: result.msg
+			});
+    }
+    return res.status(400).json({ result: "ERRO: Nome do aluno não informado." });
+  };
 
 	addStudents = async (req: Request<StudentRequest>, res: Response, next: NextFunction) => {
 		const { nome, email, senha, telefone } = req.body;
