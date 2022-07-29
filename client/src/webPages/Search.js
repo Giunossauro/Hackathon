@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom"
 import "../styles/Search.css";
-import Button from '@mui/material/Button';
+import ProcuraSearch from "../components/ProcuraSearch.js"
+import ResultadoSearch from "../components/ResultadoSearch.js"
 import InputAdornment from '@mui/material/InputAdornment';
 import OutlinedInput from '@mui/material/OutlinedInput'
 import Navbar from "../components/Navbar.js"
@@ -10,7 +11,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-
+import Button from '@mui/material/Button'
 
 const Search = () => {
     
@@ -54,7 +55,7 @@ const Search = () => {
 
             <div className="cointeinerSearch">
 
-                <div className="pesquisa">
+            <div className="pesquisa">
                 <FormControl style={{marginBottom:"5vh", color:"white"}} autocomplete="on">
                         <FormLabel id="demo-row-radio-buttons-group-label" style={{color:"white"}}>O quê deseja procurar?</FormLabel>
                         <RadioGroup
@@ -88,11 +89,8 @@ const Search = () => {
                         size="small"
                     />
 
-
-
-
-                </div>
-
+                        </div>
+                
                 <div className="resultado">
 
                     {filter.map(curso => {

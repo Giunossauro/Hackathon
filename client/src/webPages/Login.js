@@ -9,7 +9,11 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 
 
@@ -50,6 +54,21 @@ const Login = () => {
 
                     <Box sx={{ flexGrow: 1 }} className="teste-flex">
                         <Grid container spacing={2}>
+                            <Grid item xs={6} md={12}>
+                            <FormControl style={{ marginBottom: "0vh", color: "white" }} autocomplete="on">
+                        <FormLabel id="demo-row-radio-buttons-group-label" style={{ color: "white" }}></FormLabel>
+                        <RadioGroup
+                            row
+                            aria-labelledby="demo-row-radio-buttons-group-label"
+                            name="row-radio-buttons-group"
+                        >
+                            <FormControlLabel value="aluno" control={<Radio style={{ color: "white" }} />} label="Aluno" />
+                            <FormControlLabel value="professor" control={<Radio style={{ color: "white" }}  />} label="Professor" />
+                        </RadioGroup>
+                    </FormControl>
+
+                            </Grid>
+
 
                             <Grid item xs={6} md={6}>
                                 <Item><TextField

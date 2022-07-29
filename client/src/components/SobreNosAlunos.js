@@ -39,7 +39,7 @@ style={{width:"30vw", float:"left", margin:"10vw 1vw 0 7vw"}}
 />
 <Aluno 
     nome="Murilo"
-    descricao="Descrição Murilo."
+    descricao="Desenvolvedor Fullstack Web após migração de carreira de Engenheiro Civil. Escrevendo conteúdos em geral, cuidando de plantas, ouvindo rap ou assistindo algo nas horas vagas."
     foto={ImgMurilo}
     linkedin="https://www.linkedin.com/in/murilo-o/"
     github="https://github.com/akadot"
@@ -53,7 +53,7 @@ style={{width:"30vw", float:"left", margin:"10vw 1vw 0 7vw"}}
 />
 <Aluno 
     nome="Giu"
-    descricao="Descrição Giu."
+    descricao="Formado pela Estácio como analista e desenvolvedor de sistemas, sentiu a necessidade de se especializar, e na Let's Code encontrou e agarrou a oportunidade para aprender a programar de verdade!"
     foto={ImgGiu}
     linkedin="https://www.linkedin.com/in/girzo/"
     github="https://github.com/Giunossauro"
