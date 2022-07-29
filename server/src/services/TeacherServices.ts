@@ -5,13 +5,12 @@ export class TeacherService {
 	constructor() { }
 
 	getTeachers = async () => {
-		const allTeachers = await db.default.select("*").from('professores');
+		const allTeachers = await db.default.select("*").from('professores').where({ excluido: false });
 		return allTeachers;
 	};
 
 	getTeacherById = async (id: Number) => {
-		const teacherById = await db.default.select("*").from('professores').where({ id: id });
-
+		const teacherById = await db.default.select("*").from('professores').where({ id: id, excluido: false });
 		return { status: 200, msg: teacherById };
 	}
 
@@ -38,13 +37,17 @@ export class TeacherService {
 	}
 
 	updateTeacher = async (id: Number, nome: String, email: String, senha: String, telefone: String) => {
-		const findTeacher = await db.default.select("*").from('professores').where({ id: id });
+		const findTeacher = await db.default.select("*").from('professores').where({ id: id, excluido: false });
+
+		const findTeacherEmail = await db.default.select("*").from('professores').where({ email: email });
 
 		if (findTeacher.length <= 0) {
 			return { status: 404, msg: 'ERRO: ID não encontrado.' }
 		}
 
-		console.log(findTeacher)
+		if (findTeacherEmail.length > 0) {
+			return { status: 404, msg: 'ERRO: Email já existe.' }
+		}
 
 		let newHashPass = "";
 
@@ -65,7 +68,7 @@ export class TeacherService {
 	}
 
 	removeTeacher = async (id: Number) => {
-		const findTeacher = await db.default.select("*").from('professores').where({ id: id });
+		const findTeacher = await db.default.select("*").from('professores').where({ id: id, excluido: false });
 
 		if (findTeacher.length <= 0) {
 			return { status: 404, msg: 'ERRO: ID não encontrado.' };

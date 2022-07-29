@@ -40,8 +40,14 @@ export class StudentService {
 	updateStudent = async (id: Number, nome: String, email: String, senha: String, telefone: String) => {
 		const findStudent = await db.default.select("*").from('alunos').where({ id: id });
 
+		const findStudentEmail = await db.default.select("*").from('alunos').where({ email: email });
+
 		if (findStudent.length <= 0) {
 			return { status: 404, msg: 'ERRO: ID não encontrado.' }
+		}
+
+		if (findStudentEmail.length > 0) {
+			return { status: 404, msg: 'ERRO: Email já existe.' }
 		}
 
 		console.log(findStudent)
