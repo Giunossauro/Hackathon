@@ -18,6 +18,14 @@ const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     textAlign: 'center',
     color: theme.palette.text.secondary,
+    '& label.Mui-focused': {
+        color: '#63C132',
+      },
+      '& .MuiOutlinedInput-root': {
+        '&.Mui-focused fieldset': {
+          borderColor: '#63C132',
+        },
+      },
 }));
 
 
@@ -62,14 +70,14 @@ const Registration = () => {
                                     placeholder="Nome completo"
                                 /></Item>
                             </Grid>
-                            <Grid item xs={6}>
+{/*                             <Grid item xs={6}>
                                 <Item><TextField
                                     required
                                     id="outlined-required1"
                                     label="CPF"
                                     placeholder="CPF"
                                 /></Item>
-                            </Grid>
+                            </Grid> */}
                             <Grid item xs={6} md={6}>
                                 <Item><TextField
                                     required
@@ -86,7 +94,7 @@ const Registration = () => {
                                     placeholder="Telefone"
                                 /></Item>
                             </Grid>
-                            <Grid item xs={6}>
+{/*                             <Grid item xs={6}>
                                 <Item><TextField
 
                                     required
@@ -94,7 +102,7 @@ const Registration = () => {
                                     label="Data de nascimento"
                                     placeholder="xx/xx/xxxx"
                                 /></Item>
-                            </Grid>
+                            </Grid> */}
                             <Grid item xs={6}>
                                 <Item><TextField
                                     type={"password"}

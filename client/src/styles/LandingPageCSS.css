@@ -22,7 +22,11 @@
     display: flex;
     justify-content:flex-end;
     align-items: center;
-    
+}
+
+.classeAleatoria{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bold;
 }
 
 .itensNavbar a{
@@ -43,9 +47,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 20vh 0 5vh 0;
+    margin: 20vh 0 0vh 0;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: xxx-large;
+    color:#001f0682 white
 }
 
 .BackToTopBtn{
@@ -53,6 +58,7 @@
     text-align: flex-end;
     font-size: 500%;
     left: 0;
+    bottom:0;
     border: none;
     cursor: pointer;
     background-color: transparent;
@@ -74,7 +80,7 @@
     border-radius: 25px;
     display: flex;
     flex-direction: column;
-    margin: 1vw 5vw 5vw 40vw;
+    margin: 1vw 5vw 0vw 40vw;
     padding: 2vw;
     text-align: justify;
 }
