@@ -13,10 +13,6 @@ const Navbar= ()=>{
     > CODE OCEAN </Link>
     </div>
     
-{/*     <div className="itensNavbar"> 
-    <Link to="/home"
-    > Sobre Nós </Link>
-    </div> */}
 
 </div>
 

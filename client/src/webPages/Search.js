@@ -16,10 +16,11 @@ const Search = () => {
         <>
 
             <Navbar />
+
             <div className="cointeinerSearch">
 
                 <div className="pesquisa">
-                <FormControl style={{marginBottom:"5vh", color:"white"}}>
+                <FormControl style={{marginBottom:"5vh", color:"white"}} autocomplete="on">
                         <FormLabel id="demo-row-radio-buttons-group-label" style={{color:"white"}}>O quê deseja procurar?</FormLabel>
                         <RadioGroup
                             row

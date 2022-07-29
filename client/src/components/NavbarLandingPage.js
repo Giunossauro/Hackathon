@@ -8,15 +8,12 @@ const NavbarLandingPage= ()=>{
 
     <div className="navbar">
 
-    <div className="itensNavbar" >
+{/*     <div className="itensNavbar" >
     <Link to="/home"> CODE OCEAN </Link>
-    </div>
+    </div> */}
     
     <div className="itensNavbar"
     > <Link activeClass="active" to="SobreNos" spy={true} smooth={true} duration={500} >Sobre nós</Link></div>
-    
-   
-
     </div>
 
 

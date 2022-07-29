@@ -11,13 +11,25 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 
+
+
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
     textAlign: 'center',
     color: theme.palette.text.secondary,
+    '& label.Mui-focused': {
+        color: '#63C132',
+      },
+      '& .MuiOutlinedInput-root': {
+        '&.Mui-focused fieldset': {
+          borderColor: '#63C132',
+        },
+      },
 }));
 
+ 
+  
 
 
 const Login = () => {
@@ -62,7 +74,9 @@ const Login = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 <Button className="cadastroBtn" variant="contained">
-                                    <Link activeClass="active" to="/registration" spy={true} smooth={true} duration={500} >
+                                    <Link activeClass="active" to="/registration" spy={true} smooth={true} duration={500}
+                                    style={{textDecoration:"none", color:"white"}}
+                                    >
                                         Não possui Login? Cadastre-se
                                     </Link>
                                 </Button>

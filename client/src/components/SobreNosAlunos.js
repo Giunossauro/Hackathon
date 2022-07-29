@@ -28,11 +28,11 @@ style={{width:"30vw", float:"left", margin:"10vw 1vw 0 7vw"}}
     realizam contribuições sociais e sustentáveis."
     foto={ImgJu}
     linkedin="https://www.linkedin.com/in/julia-t-teo/"
-    github=""
+    github="https://github.com/juructteo"
 />
 <Aluno 
     nome="Leandro Patrício"
-    descricao="Com bacharelado e mestrado em oceanografia pela USP,hoje faz transição de carreira para a Àrea de desenvolvimento web. 'O sonho é juntar a área tech com oceanografia pesqueira'."
+    descricao="Com bacharelado e mestrado em oceanografia pela USP, hoje faz transição de carreira para a área de desenvolvimento web. 'O sonho é juntar a área tech com oceanografia pesqueira'."
     foto={ImgLe}
     linkedin="https://www.linkedin.com/in/leandro-patrico/"
     github="https://github.com/Leandro-Patricio"
@@ -49,7 +49,7 @@ style={{width:"30vw", float:"left", margin:"10vw 1vw 0 7vw"}}
     descricao="Fullstack dev formado pela Let's Code com background em Engenharia Civil e Ciências da Computação. Persistente, comunicativo e entusiasta de carros nas horas vagas."
     foto={ImgMilan}
     linkedin="https://www.linkedin.com/in/milan-cruz/"
-    github=""
+    github="https://github.com/Milan-Cruz"
 />
 <Aluno 
     nome="Giu"

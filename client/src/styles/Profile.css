@@ -1,14 +1,26 @@
-.cointeinerSearch{
-    display: flex;
-    align-items:flex-start;
-    margin: 100px 10px 0 10px;
+.profileNavbar{
+    position:relative;
+    top:60px;
+    margin:8vh 10px 0 10px;
+    background-color:rgb(48, 111, 149);
+    border-radius: 25px;
+    color: black;
+    padding:5vh 2vw;
+    display:flex;
 }
 
-.pesquisa {
-    padding: 5vw;
-    /* width: 20%; */
+.profileNavbar:hover{
+    cursor:alias;
+}
+
+.perfil {
     position: sticky;
     top:10px;
+    padding: 5vw;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
     
     margin-right: 2vw;
     background-color: rgb(4, 61, 92);
@@ -20,12 +32,13 @@
     
 }
 
-.resultado {
+.InfoPerfil {
     display: flex;
     flex-direction: column;
+    color: white;
 
     width: 70%;
-/*     height: 75vh; */
+ /*    height: 75vh; */
 
     background-color: rgb(4, 61, 92);
     text-align: center;
@@ -37,17 +50,3 @@
    
 }
 
-
-.caixa {
-
-    border: 5px solid rgb(15, 136, 184);
-    padding: 10px;
-    margin: 5px;
-    border-radius: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    color: white;
-
-}

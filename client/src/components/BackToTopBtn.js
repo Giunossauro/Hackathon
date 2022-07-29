@@ -5,12 +5,12 @@ import "../styles/LandingPageCSS.css";
 const BackToTopBtn= ()=>{
     return(
 <>
-<div style={{position:"sticky", bottom:0}}>
+<float style={{position:"sticky", bottom:"-1", margin:"-10px 0"}}>
 <button className="BackToTopBtn">
 <a onClick={() => scroll.scrollToTop()}>&#11189;</a>
 
 </button>
-</div>
+</float>
 </>             
 )
 }
