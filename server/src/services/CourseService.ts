@@ -2,17 +2,18 @@ import db from '../database/connection'
 import bcrypt from 'bcrypt';
 
 export class CourseService {
-  readonly #CURSOS: string;
+  readonly #TABLE_COURSES: string;
+
   constructor() {
-    this.#CURSOS = "cursos";
+    this.#TABLE_COURSES = "cursos";
   }
 
   getCourses = async () => {
     try {
-      const selectResponse = await db(this.#CURSOS).select("*");
+      const findCourse = await db(this.#TABLE_COURSES).select("*");
       return {
         status: 200,
-        msg: selectResponse
+        msg: findCourse
       };
     } catch (_e) {
       return {
@@ -24,38 +25,145 @@ export class CourseService {
 
   getCourseById = async (courseId: number) => {
     try {
-      const selectResponse = await db(this.#CURSOS).where({ id: Number(courseId) });
-    
-      if (!selectResponse.length) {
+      const findCourse = await db(this.#TABLE_COURSES).where({ id: Number(courseId) });
+
+      if (!findCourse.length) {
         return {
           status: 404,
           msg: "ERRO: Curso não encontrado."
         };
       }
 
-      return { status: 200, msg: selectResponse };
+      return { status: 200, msg: findCourse };
 
     } catch (_e) {
       return {
         status: 500,
-        msg: "ERRO: Falha no servidor ao consultar se o curso ja existe."
+        msg: "ERRO: Falha no servidor ao consultar o curso."
       }
     }
   };
 
-  addCourse = async (professorId: number, nome: string, horasTotais: number) => {
-
+  getCoursesByName = async (query: String) => {
     try {
-      const selectResponse = await db('cursos').select("*").where(
-        { professorid: professorId, nome: nome }
-      );
-      
-      if (selectResponse.length) {
+      const findCourse = await db(this.#TABLE_COURSES)
+        .whereRaw(`UPPER(nome) LIKE '${query.toUpperCase()}%'`);
+
+      if (!findCourse.length) {
         return {
-          status: 409,
-          msg: "ERRO: Falha ao cadastrar curso. Curso com esse nome e professor já existe."
-        }
+          status: 404,
+          msg: "ERRO: Nenhum curso não encontrado."
+        };
       }
+
+      return { status: 200, msg: findCourse };
+
+    } catch (_e) {
+      return {
+        status: 500,
+        msg: "ERRO: Falha no servidor ao consultar os cursos."
+      }
+    }
+  };
+
+  addCourse = async (professorId: number, nome: string, linguagem: string, categoria: string, horasTotais: number) => {
+    const findCourse = await db('cursos').select("*").where(
+      { professorid: professorId, nome: nome }
+    );
+
+    if (findCourse.length > 0) {
+      return {
+        status: 409,
+        msg: "ERRO: Falha ao cadastrar curso. Curso com esse nome e professor já existe."
+      }
+    }
+
+    const findLanguage = await db('linguagens').select("*").where({ nome: linguagem })
+    const findCategory = await db('categorias').select("*").where({ nome: categoria })
+
+    if (!findLanguage.length || !findCategory.length) {
+      return { status: 404, msg: "ERRO: Falha ao cadastrat Categoria ou Linguagem." }
+    }
+
+    console.log("LANG: ", findLanguage)
+    console.log("ID LANG: ", findLanguage[0].id)
+    console.log("CAT: ", findCategory)
+    console.log("ID CAT: ", findCategory[0].id)
+
+    const newCourse: object = {
+      professorid: professorId,
+      nome: nome,
+      linguagem: linguagem,
+      categoria: categoria,
+      horastotais: horasTotais
+    };
+
+    const langID = parseInt(findLanguage[0].id)
+    const catID = parseInt(findCategory[0].id)
+
+    const cursoID = await db(this.#TABLE_COURSES).insert(newCourse).returning("id");
+    await db("cursolinguagem").insert({ cursoid: cursoID[0].id, linguagemid: langID })
+    await db("cursocategoria").insert({ cursoid: cursoID[0].id, categoriaid: catID })
+
+    return {
+      status: 201,
+      msg: "Curso criado com sucesso!"
+    }
+  }
+
+  updateCourse = async (id: number, professorId: number, nome: string, linguagem: string, categoria: string, horasTotais: number) => {
+    let findCourse;
+    try {
+      findCourse = await db(this.#TABLE_COURSES).select("*").where({ id: id });
+
+      if (!findCourse.length) {
+        return { status: 404, msg: 'ERRO: ID não encontrado.' }
+      }
+
+      const findLanguage = await db('linguagens').select("*").where({ nome: linguagem })
+      const findCategory = await db('categorias').select("*").where({ nome: categoria })
+
+      if (!findLanguage.length || !findCategory.length) {
+        return { status: 404, msg: "ERRO: Falha ao cadastrat Categoria ou Linguagem." }
+      }
+
+      const updateCourse = {
+        professorid: professorId > 0 ? professorId : findCourse[0].professorId,
+        nome: nome != "" ? nome : findCourse[0].nome,
+        linguagem: linguagem != "" ? linguagem : findLanguage[0].nome,
+        categoria: categoria != "" ? categoria : findCategory[0].nome,
+        horasTotais: horasTotais > 0 ? horasTotais : findCourse[0].horasTotais,
+      }
+
+      await db(this.#TABLE_COURSES).where({ id: id }).update(updateCourse);
+
+      await db("cursolinguagem").where({ cursoid: id }).update({ linguagemid: Number(findLanguage[0].id) })
+      await db("cursocategoria").where({ cursoid: id }).update({ categoriaid: Number(findCategory[0].id) })
+
+
+      return {
+        status: 201,
+        msg: "Curso alterado com sucesso!"
+      }
+
+    } catch (_e) {
+      return {
+        status: 500,
+        msg: "ERRO: Falha no servidor ao consultar se o curso ja existe."
+      }
+    }
+  }
+
+  removeCourse = async (id: number) => {
+    let findCourse;
+    try {
+      findCourse = await db(this.#TABLE_COURSES).select("*").where({ id: id });
+
+      if (!findCourse.length) {
+        return { status: 404, msg: 'ERRO: ID não encontrado.' }
+      }
+
+
     } catch (_e) {
       return {
         status: 500,
@@ -63,61 +171,16 @@ export class CourseService {
       }
     }
 
-    const newCourse: object = {
-      professorid: professorId,
-      nome: nome,
-      horastotais: horasTotais
-    };
-
     try {
-      await db(this.#CURSOS).insert(newCourse);
-      return {
-        status: 201,
-        msg: "ok"
-      }
+      await db(this.#TABLE_COURSES).where({ id: id }).del();
+      await db("cursolinguagem").where({ cursoid: id }).del();
+      await db("cursocategoria").where({ cursoid: id }).del();
+      return { status: 204, msg: "Curso excluído com sucesso!" }
     } catch (_e) {
       return {
         status: 500,
-        msg: "Algo errado aconteceu na hora de inserir o professor."
+        msg: "ERRO: Algo errado aconteceu na hora de inserir o curso."
       }
     }
   }
-
-	updateCourse = async (id: number, professorId: number, nome: string, horasTotais: number) => {
-		const findCourse = await db(this.#CURSOS).select("*").where({ id: id });
-
-		if (findCourse.length <= 0) {
-			return { status: 404, msg: 'ERRO: ID não encontrado.' }
-		}
-
-		console.log(findCourse)
-
-		let newHashPass = "";
-
-		if (nome != "") {
-			newHashPass = await bcrypt.hash(nome.toString(), 10);
-		}
-
-		const updatedUser = {
-			professorId: professorId > 0 ? professorId : findCourse[0].professorId,
-			nome: nome != "" ? newHashPass : findCourse[0].nome,
-			horasTotais: horasTotais > 0 ? horasTotais : findCourse[0].horasTotais,
-		}
-
-		await db(this.#CURSOS).where({ id: id }).update(updatedUser);
-
-		return { status: 200, msg: "Sucesso" }
-	}
-
-	removeCourse = async (id: number) => {
-		const findCourse = await db(this.#CURSOS).select("*").where({ id: id });
-
-		if (findCourse.length <= 0) {
-			return { status: 404, msg: 'ERRO: ID não encontrado.' };
-		}
-
-		await db(this.#CURSOS).where({ id: id }).update({ 'excluido': true });
-
-		return { status: 204, msg: "Sucesso" }
-	}
 }

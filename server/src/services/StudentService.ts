@@ -2,25 +2,108 @@ import * as db from '../database/connection';
 import bcrypt from 'bcrypt';
 
 export class StudentService {
-	constructor() { }
+  readonly #TABLE_STUDENTS: string;
+
+	constructor() {
+    this.#TABLE_STUDENTS = "alunos";
+	}
 
 	getStudents = async () => {
-		const allStudents = await db.default.select("*").from('alunos');
-		return allStudents;
+    try {
+			const allStudents = await db.default.select("*").from(this.#TABLE_STUDENTS);
+			return {
+				status: 200,
+				msg: allStudents
+			};
+    } catch (_e) {
+      return {
+        status: 500,
+        msg: "ERRO: Falha no servidor ao consultar os alunos."
+      }
+    }
 	};
 
 	getStudentById = async (id: Number) => {
-		const StudentById = await db.default.select("*").from('alunos').where({ id: id });
+    try {
+			const StudentById = await db.default.select("*").from(this.#TABLE_STUDENTS).where({ id: id });
 
-		return { status: 200, msg: StudentById };
-	}
+			if (!StudentById.length) {
+        return {
+          status: 404,
+          msg: "ERRO: Aluno não encontrado."
+        };
+      }
+
+      return { status: 200, msg: StudentById };
+			
+		} catch (_e) {
+      return {
+        status: 500,
+        msg: "ERRO: Falha no servidor ao consultar o aluno."
+      }
+    }
+	};
+
+  getStudentsByName = async (query: String) => {
+    try {
+      const findStudent = await db.default(this.#TABLE_STUDENTS)
+        .whereRaw(`UPPER(nome) LIKE '${query.toUpperCase()}%'`);
+
+      if (!findStudent.length) {
+        return {
+          status: 404,
+          msg: "ERRO: Nenhum aluno não encontrado."
+        };
+      }
+
+      return { status: 200, msg: findStudent };
+
+    } catch (_e) {
+      return {
+        status: 500,
+        msg: "ERRO: Falha no servidor ao consultar os alunos."
+      }
+    }
+  };
+
+  getStudentByEmail = async (query: String) => {
+    try {
+      const findStudent = await db.default(this.#TABLE_STUDENTS)
+        .whereRaw(`UPPER(email) = '${query.toUpperCase()}'`);
+
+      if (!findStudent.length) {
+        return {
+          status: 404,
+          msg: "ERRO: Nenhum aluno não encontrado."
+        };
+      }
+
+      return { status: 200, msg: findStudent };
+
+    } catch (_e) {
+      return {
+        status: 500,
+        msg: "ERRO: Falha no servidor ao consultar os alunos."
+      }
+    }
+  };
 
 	addStudent = async (nome: String, email: String, senha: String, telefone: String) => {
-		const findStudent = await db.default.select("*").from('alunos').where({ email: email });
+		try {
+			const findStudent = await db.default.select("*").from(this.#TABLE_STUDENTS).where({ email: email });
 
-		if (findStudent.length > 0) {
-			return { status: 400, msg: "ERRO: Falha ao cadastrar usuário. Verifique email e senha." }
-		}
+      if (findStudent.length) {
+        return {
+          status: 409,
+          msg: "ERRO: Falha ao cadastrar aluno. Verifique email e senha."
+        }
+      }
+    } catch (_e) {
+      return {
+        status: 500,
+        msg: "ERRO: Falha no servidor ao consultar se o aluno ja existe."
+      }
+    }
 
 		const hashPass = await bcrypt.hash(senha.toString(), 10)
 
@@ -32,19 +115,44 @@ export class StudentService {
 			excluido: false
 		}
 
-		await db.default("alunos").insert(newUser)
-
-		return { status: 201, msg: newUser }
+    try {
+			await db.default(this.#TABLE_STUDENTS).insert(newUser);
+      return {
+        status: 201,
+        msg: "Aluno criado com sucesso!"
+      }
+    } catch (_e) {
+      return {
+        status: 500,
+        msg: "ERRO: Algo errado aconteceu na hora de inserir o aluno."
+      }
+    }
 	}
 
 	updateStudent = async (id: Number, nome: String, email: String, senha: String, telefone: String) => {
-		const findStudent = await db.default.select("*").from('alunos').where({ id: id });
+		let findStudent;
+		try {
+			findStudent = await db.default(this.#TABLE_STUDENTS).select("*").where({ id: id });
+
+      if (!findStudent.length) {
+        return { status: 404, msg: 'ERRO: ID não encontrado.' }
+      }
+		} catch (_e) {
+			return {
+				status: 500,
+				msg: "ERRO: Falha no servidor ao consultar se o aluno ja existe."
+			}
+		}
+
+		const findStudentEmail = (await this.getStudentByEmail(email)).msg;
 
 		if (findStudent.length <= 0) {
 			return { status: 404, msg: 'ERRO: ID não encontrado.' }
 		}
 
-		console.log(findStudent)
+		if (findStudentEmail.length) {
+			return { status: 409, msg: 'ERRO: Email já existe.' }
+		}
 
 		let newHashPass = "";
 
@@ -59,20 +167,43 @@ export class StudentService {
 			telefone: telefone != "" ? telefone : findStudent[0].telefone,
 		}
 
-		await db.default("alunos").where({ id: id }).update(updatedUser);
-
-		return { status: 204, msg: "Sucesso" }
+    try {
+			await db.default(this.#TABLE_STUDENTS).where({ id: id }).update(updatedUser);
+			return {
+        status: 201,
+        msg: "Aluno alterado com sucesso!"
+      }
+    } catch (_e) {
+      return {
+        status: 500,
+        msg: "ERRO: Algo errado aconteceu na hora de alterar o aluno."
+      }
+    }
 	}
 
 	removeStudent = async (id: Number) => {
-		const findStudent = await db.default.select("*").from('alunos').where({ id: id });
+    let findCourse;
+    try {
+			findCourse = await db.default.select("*").from(this.#TABLE_STUDENTS).where({ id: id });
+			
+			if (!findCourse.length) {
+        return { status: 404, msg: 'ERRO: ID não encontrado.' }
+      }
+    } catch (_e) {
+      return {
+        status: 500,
+        msg: "ERRO: Falha no servidor ao consultar se o curso ja existe."
+      }
+    }
 
-		if (findStudent.length <= 0) {
-			return { status: 404, msg: 'ERRO: ID não encontrado.' };
-		}
-
-		await db.default("alunos").where({ id: id }).update({ 'excluido': true });
-
-		return { status: 204, msg: "Sucesso" }
+    try {
+      await db.default(this.#TABLE_STUDENTS).where({ id: id }).update({ 'excluido': true });
+      return { status: 204, msg: "Aluno excluído com sucesso!" }
+    } catch (_e) {
+      return {
+        status: 500,
+        msg: "ERRO: Algo errado aconteceu na hora de excluir o aluno."
+      }
+    }
 	}
 }
