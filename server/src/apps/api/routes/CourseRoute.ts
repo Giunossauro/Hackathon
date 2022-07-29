@@ -8,7 +8,7 @@ router.get("/cursos", _controller.getCourses);
 router.get("/cursos/:id", _controller.getCourseById);
 router.get("/cursos/:query", _controller.getCoursesByName);
 router.post("/cursos", _controller.addCourse);
-router.post("/cursos/:id", _controller.updateCourse);
-router.post("/cursos/:id", _controller.removeCourse);
+router.put("/cursos/:id", _controller.updateCourse);
+router.delete("/cursos/:id", _controller.removeCourse);
 
 export = router;
