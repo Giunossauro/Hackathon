@@ -9,7 +9,7 @@ export class StudentService {
 	}
 
 	getStudents = async () => {
-    try {
+    try { 
 			const allStudents = await db.default.select("*").from(this.#TABLE_STUDENTS);
 			return {
 				status: 200,
