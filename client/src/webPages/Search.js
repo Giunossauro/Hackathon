@@ -24,28 +24,28 @@ const Search = () => {
     useEffect(() => {
         (async () => {
             try {
-              // aqui vem o axios no lugar do fetch, embora o fetch ja funciona
-              const response = await fetch(
-                `http://localhost:3001/cursos`
-              );
-              if (!response.ok) {
-                throw new Error(
-                  `This is an HTTP error: The status is ${response.status}`
+                // aqui vem o axios no lugar do fetch, embora o fetch ja funciona
+                const response = await fetch(
+                    `http://localhost:3001/cursos`
                 );
-              }
-              let actualData = await response.json();
-              console.log(actualData.result)
-              setData(actualData.result);
+                if (!response.ok) {
+                    throw new Error(
+                        `This is an HTTP error: The status is ${response.status}`
+                    );
+                }
+                let actualData = await response.json();
+                console.log(actualData.result)
+                setData(actualData.result);
             } catch(err) {
-              setData('');
+                setData('');
             } 
-          })();
-        }, []);
+        })();
+    }, []);
 
-        useEffect(() => {
-          const filtered = data.filter(curso => curso.linguagem == option)
-          setFilter(filtered)
-        }, [option])
+    useEffect(() => {
+      const filtered = data.filter(curso => curso.linguagem == option)
+      setFilter(filtered)
+    }, [data, option])
         
 
     return (
