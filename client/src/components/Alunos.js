@@ -6,7 +6,7 @@ const Aluno = (props) => {
         <>
             <div className="AlunoComFoto"
             >
-                <img style={{ height: "100px", width: "100px", borderRadius: "5px" }}
+                <img style={{ height: "100px", width: "100px", borderRadius: "50px" }}
                     src={props.foto} alt={props.nome} />
 
                 <div className="AlunoComInfo">
