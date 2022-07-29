@@ -7,8 +7,10 @@ import CaracteristicasPerfilCurso from "../components/CaracteristicasPerfilCurso
 import CaracteristicasDoCurso from "../components/CaracteristicasDoCurso"
 import CursosOferecidos from "../components/CursosOferecidosPerfil"
 import ImgEdu from '../assets/Edu.png'
+import axios from 'axios'
 
 const SearchCursos = () => {
+
     return (
         <>
 
@@ -32,9 +34,9 @@ const SearchCursos = () => {
                 >
                     <CaracteristicasPerfilCurso
                         img={ImgEdu}
-                        nome="Como comer seu humano"
+                        nome="Tubarões à caça"
                         horario="18h às 6h (noturno)"
-                        descricao="Aprenda a comer seu humano enquanto ele dorme"
+                        descricao="Devorar e peculiaridades"
                         professor="Edu cação"
                     />
 
