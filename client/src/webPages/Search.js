@@ -1,7 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom"
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom"
 import "../styles/Search.css";
-import Button from '@mui/material/Button';
+import ProcuraSearch from "../components/ProcuraSearch.js"
+import ResultadoSearch from "../components/ResultadoSearch.js"
 import InputAdornment from '@mui/material/InputAdornment';
 import OutlinedInput from '@mui/material/OutlinedInput'
 import Navbar from "../components/Navbar.js"
@@ -10,8 +11,43 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import Button from '@mui/material/Button'
 
 const Search = () => {
+    
+    const location = useLocation()
+    const linguagem = location.state
+    const [option, setOption] = useState(linguagem)
+    const [data, setData] = useState([])
+    const [filter, setFilter] = useState(data)
+    
+    useEffect(() => {
+        (async () => {
+            try {
+              // aqui vem o axios no lugar do fetch, embora o fetch ja funciona
+              const response = await fetch(
+                `http://localhost:3001/cursos`
+              );
+              if (!response.ok) {
+                throw new Error(
+                  `This is an HTTP error: The status is ${response.status}`
+                );
+              }
+              let actualData = await response.json();
+              console.log(actualData.result)
+              setData(actualData.result);
+            } catch(err) {
+              setData('');
+            } 
+          })();
+        }, []);
+
+        useEffect(() => {
+          const filtered = data.filter(curso => curso.linguagem == option)
+          setFilter(filtered)
+        }, [option])
+        
+
     return (
         <>
 
@@ -19,7 +55,7 @@ const Search = () => {
 
             <div className="cointeinerSearch">
 
-                <div className="pesquisa">
+            <div className="pesquisa">
                 <FormControl style={{marginBottom:"5vh", color:"white"}} autocomplete="on">
                         <FormLabel id="demo-row-radio-buttons-group-label" style={{color:"white"}}>O quê deseja procurar?</FormLabel>
                         <RadioGroup
@@ -53,68 +89,22 @@ const Search = () => {
                         size="small"
                     />
 
-
-
-
-                </div>
-
+                        </div>
+                
                 <div className="resultado">
 
-                    {/*                     <h2 className="Title">Resultados</h2> */}
-                    <div className="caixa">
-                        <img alt="Foto aqui" />
-                        <p > info aqui </p>
-                    </div>
-                    <div className="caixa">
-                        <img alt="Foto aqui" />
-                        <p > info aqui </p>
-                    </div>
-                    <div className="caixa">
-                        <img alt="Foto aqui" />
-                        <p > info aqui </p>
-                    </div>
-                    <div className="caixa">
-                        <img alt="Foto aqui" />
-                        <p > info aqui </p>
-                    </div>
-                    <div className="caixa">
-                        <img alt="Foto aqui" />
-                        <p > info aqui </p>
-                    </div>
-                    <div className="caixa">
-                        <img alt="Foto aqui" />
-                        <p > info aqui </p>
-                    </div>
-                    <div className="caixa">
-                        <img alt="Foto aqui" />
-                        <p > info aqui </p>
-                    </div>
-                    <div className="caixa">
-                        <img alt="Foto aqui" />
-                        <p > info aqui </p>
-                    </div>
-                    <div className="caixa">
-                        <img alt="Foto aqui" />
-                        <p > info aqui </p>
-                    </div>
-                    <div className="caixa">
-                        <img alt="Foto aqui" />
-                        <p > info aqui </p>
-                    </div>
-                    <div className="caixa">
-                        <img alt="Foto aqui" />
-                        <p > info aqui </p>
-                    </div>
-                    <div className="caixa">
-                        <img alt="Foto aqui" />
-                        <p > info aqui </p>
-                    </div>
-
+                    {filter.map(curso => {
+                        return (
+                            <div key={curso.id} className="caixa">
+                                <h2>{curso.nome}</h2>
+                                <p>{curso.linguagem}</p>
+                                <p>{curso.categoria}</p>
+                                <p>{curso.horastotais}</p>
+                            </div>
+                        )
+                    })}
                 </div>
-
-
             </div>
-
         </>
     );
 }

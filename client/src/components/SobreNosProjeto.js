@@ -4,6 +4,7 @@ const SobreNosProjeto= ()=>{
     return(
 <>
 
+
 <p className="SobreNosProjeto">
     O Code Ocean tem como objetivo principal a democratização da educação. 
     A ideia é criar uma plataforma onde alunos e professores possam se 
