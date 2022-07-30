@@ -7,10 +7,6 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import CarroselLandingPage from '../components/CarroselLandingPage.js'
 import { Link } from "react-router-dom";
 
-// import { useState, createContext } from 'React'
-
-// const [option, setOption] = useState('')
-// const optionContext = createContext({option, setOption})
 
 const Logo = () => {
 
@@ -35,25 +31,25 @@ const Logo = () => {
       <div style={{ textAlign: "center", margin: "1vw", color: "#006064" }}>
         <ButtonGroup variant="outlined" aria-label="outlined button group">
           <Button variant="contained">
-             <Link activeClass="active" to="/search" state="javascript" spy={true} style={{textDecoration:"none", color:"white"}}>
-            JavaScript
-          </Link></Button>
-          <Button variant="contained">      
-              <Link activeClass="active" to="/search" state="html" spy={true} style={{textDecoration:"none", color:"white"}}>
-            Html+CSS
-          </Link></Button>
-          <Button variant="contained">        
-            <Link activeClass="active" to="/search" state="react" spy={true} style={{textDecoration:"none", color:"white"}}>
-            React
-          </Link></Button>
-          <Button variant="contained">    
-                <Link activeClass="active" to="/search" state="node" spy={true} style={{textDecoration:"none", color:"white"}}>
-            Node.js
-          </Link></Button>
-          <Button variant="contained">      
-              <Link activeClass="active" to="/search" state="programacao" spy={true} style={{textDecoration:"none", color:"white"}}>
-            Iniciante? Comece aqui
-          </Link></Button>
+            <Link activeClass="active" to="/search" state="javascript" spy={true} style={{ textDecoration: "none", color: "white" }}>
+              JavaScript
+            </Link></Button>
+          <Button variant="contained">
+            <Link activeClass="active" to="/search" state="html" spy={true} style={{ textDecoration: "none", color: "white" }}>
+              Html+CSS
+            </Link></Button>
+          <Button variant="contained">
+            <Link activeClass="active" to="/search" state="react" spy={true} style={{ textDecoration: "none", color: "white" }}>
+              React
+            </Link></Button>
+          <Button variant="contained">
+            <Link activeClass="active" to="/search" state="node" spy={true} style={{ textDecoration: "none", color: "white" }}>
+              Node.js
+            </Link></Button>
+          <Button variant="contained">
+            <Link activeClass="active" to="/search" state="programacao" spy={true} style={{ textDecoration: "none", color: "white" }}>
+              Iniciante? Comece aqui
+            </Link></Button>
         </ButtonGroup>
 
 
@@ -61,9 +57,9 @@ const Logo = () => {
 
       <div style={{ textAlign: "center", marginTop: "15vh" }}>
         <Button variant="contained" style={{ margin: "0 1vw" }} >
-          <Link to="/login" style={{textDecoration:"none", color:"white"}}> Login </Link></Button>
+          <Link to="/login" style={{ textDecoration: "none", color: "white" }}> Login </Link></Button>
         <Button variant="contained" style={{ margin: "0 1vw" }} >
-          <Link to="/registration" style={{textDecoration:"none", color:"white"}}> Registre-se </Link></Button>
+          <Link to="/registration" style={{ textDecoration: "none", color: "white" }}> Registre-se </Link></Button>
 
 
       </div>

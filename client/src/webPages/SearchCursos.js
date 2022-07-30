@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import "../styles/Profile.css";
 import Navbar from "../components/Navbar.js"
 import ItensNavbarPerfil from "../components/ItensNavbarPerfil"
@@ -10,6 +10,8 @@ import ImgEdu from '../assets/Edu.png'
 import axios from 'axios'
 
 const SearchCursos = () => {
+    const location = useLocation()
+    const curso = location.state
 
     return (
         <>
@@ -34,9 +36,10 @@ const SearchCursos = () => {
                 >
                     <CaracteristicasPerfilCurso
                         img={ImgEdu}
-                        nome="Tubarões à caça"
-                        horario="18h às 6h (noturno)"
-                        descricao="Devorar e peculiaridades"
+                        nome={curso.nome}
+                        horario={`${curso.horastotais} horas`}
+                        linguagem={curso.linguagem}
+                        categoria={curso.categoria}
                         professor="Edu cação"
                     />
 

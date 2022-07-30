@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import "../styles/Profile.css";
 import Navbar from "../components/Navbar.js"
 import ItensNavbarPerfil from "../components/ItensNavbarPerfil"
@@ -8,6 +8,8 @@ import CursosOferecidos from "../components/CursosOferecidosPerfil"
 import ImgEdu from '../assets/Edu.png'
 
 const SearchTeachers = () => {
+    const location = useLocation();
+    const user = location.state;
     return (
         <>
 
@@ -30,9 +32,9 @@ const SearchTeachers = () => {
                 >
                     <CaracteristicasPerfil
                         img={ImgEdu}
-                        nome="Edu Cação Professor"
-                        idade="Até 35 anos"
-                        email="Educacao@CodeOcean.com"
+                        nome={user.username}
+                        email={user.email}
+                        contato={user.telefone}
                     />
 
                 </div>
@@ -43,21 +45,16 @@ const SearchTeachers = () => {
                         Cursos
                     </h1>
 
-                    <CursosOferecidos
-                        curso="Como comer humanos"
-                        avaliacao="5"
-                        alunosFormados="50"
-                    />
-                    <CursosOferecidos
-                        curso="Web Full Stack"
-                        avaliacao="4"
-                        alunosFormados="30"
-                    />
-                    <CursosOferecidos
-                        curso="Forme sua cabeça: uma visão ampla"
-                        avaliacao="3"
-                        alunosFormados="5"
-                    />
+                    {user.cursos.map(curso => {
+                        return (
+                            <CursosOferecidos
+                                curso={curso.nome}
+                                avaliacao="5"
+                                alunosFormados="50"
+                                key={curso.id}
+                            />
+                        )
+                    })}
 
                 </div>
 
