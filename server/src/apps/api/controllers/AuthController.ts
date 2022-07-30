@@ -21,7 +21,7 @@ export class AuthController {
 			return res.status(400).json({ result: "ERRO: Confira e preencha todos os campos." });
 		}
 
-		if (tipo != "aluno" || tipo != "professor") {
+		if (tipo !== "aluno" && tipo !== "professor") {
 			return res.status(400).json({ result: "ERRO: Confira e preencha todos os campos." });
 		}
 
