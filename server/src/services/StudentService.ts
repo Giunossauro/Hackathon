@@ -48,7 +48,7 @@ export class StudentService {
   getStudentsByName = async (query: String) => {
     try {
       const findStudent = await db.default(this.#TABLE_STUDENTS)
-        .whereRaw(`UPPER(nome) LIKE '${query.toUpperCase()}%'`);
+        .whereRaw(`UPPER(nome) LIKE '%${query.toUpperCase()}%'`);
 
       if (!findStudent.length) {
         return {

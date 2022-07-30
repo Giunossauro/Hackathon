@@ -47,7 +47,7 @@ export class CourseService {
   getCoursesByName = async (query: String) => {
     try {
       const findCourse = await db(this.#TABLE_COURSES)
-        .whereRaw(`UPPER(nome) LIKE '${query.toUpperCase()}%'`);
+        .whereRaw(`UPPER(nome) LIKE '%${query.toUpperCase()}%'`);
 
       if (!findCourse.length) {
         return {
