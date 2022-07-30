@@ -14,16 +14,16 @@ import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button'
 
 const Search = () => {
-    
+
     const location = useLocation()
     const linguagem = location.state
     const [option, setOption] = useState(linguagem)
     const [data, setData] = useState([])
     const [filter, setFilter] = useState(data)
-    
+
     const [divProcuraBarra, setDivProcuraBarra] = useState(true);
     const [divProcuraBtn, setDivProcuraBtn] = useState(false);
-    
+
     useEffect(() => {
         (async () => {
             try {
@@ -39,29 +39,33 @@ const Search = () => {
                 let actualData = await response.json();
                 console.log(actualData.result)
                 setData(actualData.result);
-            } catch(err) {
+            } catch (err) {
                 setData('');
-            } 
+            }
         })();
     }, []);
 
     useEffect(() => {
-      const filtered = data.filter(curso => curso.linguagem == option)
-      setFilter(filtered)
-    }, [data, option])
-        
-
-
-    
-        const BarraProcura = (BarraDeProcura) => {
-            if (!BarraDeProcura) {
-                setDivProcuraBarra(false)
-                setDivProcuraBtn(true)
-            } else {
-                setDivProcuraBarra(true)
-                setDivProcuraBtn(false)
-            }
+        const filtered = data.filter(curso => curso.linguagem === option)
+        if (filtered.length > 0) {
+            setFilter(filtered)
+        } else {
+            setFilter(data)
         }
+    }, [data, option])
+
+
+
+
+    const BarraProcura = (BarraDeProcura) => {
+        if (!BarraDeProcura) {
+            setDivProcuraBarra(false)
+            setDivProcuraBtn(true)
+        } else {
+            setDivProcuraBarra(true)
+            setDivProcuraBtn(false)
+        }
+    }
 
 
     return (
@@ -71,7 +75,7 @@ const Search = () => {
 
             <div className="cointeinerSearch">
 
-            <div className="pesquisa">
+                <div className="pesquisa">
                     <FormControl style={{ marginBottom: "5vh", color: "white" }} autocomplete="on">
                         <FormLabel id="demo-row-radio-buttons-group-label" style={{ color: "white" }}>O quê deseja procurar?</FormLabel>
                         <RadioGroup
@@ -79,9 +83,9 @@ const Search = () => {
                             aria-labelledby="demo-row-radio-buttons-group-label"
                             name="row-radio-buttons-group"
                         >
-                            <FormControlLabel value="aluno" control={<Radio style={{ color: "white" }} />} label="Alunos" onClick={()=>BarraProcura(true)} />
-                            <FormControlLabel value="professor" control={<Radio style={{ color: "white" }}  />} label="Professores" onClick={()=>BarraProcura(true)}/>
-                            <FormControlLabel value="curso" control={<Radio style={{ color: "white" }} />} label="Cursos" onClick={()=>BarraProcura(false)} />
+                            <FormControlLabel value="aluno" control={<Radio style={{ color: "white" }} />} label="Alunos" onClick={() => BarraProcura(true)} />
+                            <FormControlLabel value="professor" control={<Radio style={{ color: "white" }} />} label="Professores" onClick={() => BarraProcura(true)} />
+                            <FormControlLabel value="curso" control={<Radio style={{ color: "white" }} />} label="Cursos" onClick={() => BarraProcura(false)} />
                         </RadioGroup>
                     </FormControl>
 
@@ -92,8 +96,6 @@ const Search = () => {
                                 maxWidth: '100%',
                             }}
                             id="outlined-adornment-weight"
-                            // value={values.weight}
-                            // onChange={handleChange('weight')}
                             placeholder="Search field"
                             endAdornment={<InputAdornment position="end"><Button variant="text">🔍</Button></InputAdornment>}
                             aria-describedby="outlined-weight-helper-text"
@@ -108,22 +110,41 @@ const Search = () => {
                     </div>
 
                     <div style={{ display: divProcuraBtn ? "block" : "none" }}>
-                        <Button variant="contained">Contained</Button><br/>                    
-                        <Button variant="contained">Contained</Button><br/>
-                        <Button variant="contained">Contained</Button><br/>
+                        <Button variant="contained">Contained</Button><br />
+                        <Button variant="contained">Contained</Button><br />
+                        <Button variant="contained">Contained</Button><br />
                     </div>
-            </div>
+                </div>
 
-                
+
                 <div className="resultado">
 
                     {filter.map(curso => {
                         return (
                             <div key={curso.id} className="caixa">
-                                <h2>{curso.nome}</h2>
-                                <p>{curso.linguagem}</p>
-                                <p>{curso.categoria}</p>
-                                <p>{curso.horastotais}</p>
+                                <div>
+                                    <p>Nome do Curso:</p>
+
+                                    <h3>{curso.nome}</h3>
+                                </div>
+                                <div>
+                                    <p>Linguagem:
+                                    </p>
+
+                                    <h4>{curso.linguagem}</h4>
+                                </div>
+                                <div>
+                                    <p>Categoria:
+                                    </p>
+
+                                    <h4>{curso.categoria}</h4>
+                                </div>
+                                <div>
+                                    <p>Total de Horas:
+                                    </p>
+
+                                    <h4>{curso.horastotais}</h4>
+                                </div>
                             </div>
                         )
                     })}

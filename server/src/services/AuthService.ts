@@ -20,7 +20,7 @@ export class AuthService {
 			return { status: 404, msg: 'ERRO: Login incorreto.' };
 		}
 
-		const passMatch = await bcrypt.compare(senha.toString(), findEmail[0].password);
+		const passMatch = await bcrypt.compare(senha.toString(), findEmail[0].senha);
 
 		if (!passMatch) {
 			return { status: 403, msg: 'ERRO: Login incorreto.' };
