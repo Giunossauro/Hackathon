@@ -11,6 +11,6 @@ Depois digite o seguinte comando no outro terminal:
 npm run client
 ```
 
-### Veja como:  
+### Veja como (passe o mouse e aperte o Play):  
 
 ![How to Run](https://github.com/Giunossauro/Hackathon/blob/master/How-to-Run.gif)
