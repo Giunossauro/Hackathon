@@ -78,8 +78,8 @@ export class CourseService {
       }
     }
 
-    const findLanguage = await db('linguagens').select("*").where({ nome: linguagem })
-    const findCategory = await db('categorias').select("*").where({ nome: categoria })
+    const findLanguage = await db('linguagens').select("*").where({ nome: linguagem });
+    const findCategory = await db('categorias').select("*").where({ nome: categoria });
 
     if (!findLanguage.length || !findCategory.length) {
       return { status: 404, msg: "ERRO: Falha ao cadastrat Categoria ou Linguagem." }
@@ -90,12 +90,15 @@ export class CourseService {
     console.log("CAT: ", findCategory)
     console.log("ID CAT: ", findCategory[0].id)
 
+    const nomeProfessor = await db('professores').select('nome').where({ professorid: professorId });
+
     const newCourse: object = {
       professorid: professorId,
       nome: nome,
       linguagem: linguagem,
       categoria: categoria,
-      horastotais: horasTotais
+      horastotais: horasTotais,
+      nomeprofessor: nomeProfessor
     };
 
     const langID = parseInt(findLanguage[0].id)

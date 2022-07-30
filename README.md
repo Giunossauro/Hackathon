@@ -1,20 +1,16 @@
 ### Para iniciar os repositórios:
+
+Abra 2 terminais na raiz do projeto e digite os seguintes comandos em qualquer um deles digite:  
 ```
-cd client
 npm install
-cd ..
-cd server
-npm install
+npm run server
 ```
 
-### Para iniciar o client (ReactJS):
+Depois digite o seguinte comando no outro terminal:  
 ```
-npm start
-```
-
-### Para iniciar o server (express):
-```
-npm run dev
+npm run client
 ```
 
-#### Melhor com 2 terminais um em cada diretório (client/server)
+### Veja como (passe o mouse e aperte o Play):  
+
+![How to Run](https://github.com/Giunossauro/Hackathon/blob/master/How-to-Run.gif)
