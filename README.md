@@ -13,4 +13,10 @@ npm run client
 
 ### Veja como (passe o mouse e aperte o Play):  
 
-![How to Run](https://github.com/Giunossauro/Hackathon/blob/master/How-to-Run.gif)
+![How to Run](https://github.com/Giunossauro/Hackathon/blob/master/How-to-Run.gif).
+
+### DATABASE:  
+
+Renomeie o arquivo 'dotenv' para '.env' e coloque a senha que você criar (use `admin` para usar a senha que já está no arquivo).
+
+O banco em si está na pasta database e precisa ser executado no psql, pgadmin, dbeaver ou similar.
