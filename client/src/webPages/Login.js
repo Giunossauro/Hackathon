@@ -94,7 +94,7 @@ const Login = () => {
 
                     <Box sx={{ flexGrow: 1 }} className="teste-flex">
                         <Grid container spacing={2}>
-                            <Grid item xs={6} md={12}>
+                            <Grid item xs={12} md={12}>
                                 <FormControl style={{ marginBottom: "0vh", color: "white" }} autocomplete="on">
                                     <FormLabel id="demo-row-radio-buttons-group-label" style={{ color: "white" }}></FormLabel>
                                     <RadioGroup
