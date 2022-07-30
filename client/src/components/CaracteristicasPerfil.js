@@ -10,12 +10,11 @@ const CaracteristicasPerfil = (props) => {
                 style={{ height: "140px", width: "140px" }}
                 alt="Imagem perfil" />
 
-            <div style={{fontSize: "30px" }}>
+            <div style={{ fontSize: "30px" }}>
                 <b>{props.nome}</b>
             </div>
 
             <ul style={{ listStyleType: "none", padding: "0", textAlign: "left" }}>
-                <li style={{ marginBottom: "3vh" }}>Idade: {props.idade}</li>
                 <li style={{ marginBottom: "3vh" }}>Email: {props.email}</li>
                 <li style={{ marginBottom: "3vh" }}>Contato: {props.contato}</li>
             </ul>

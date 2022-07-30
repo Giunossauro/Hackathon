@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import "../styles/Profile.css";
 import Navbar from "../components/Navbar.js"
 import ItensNavbarPerfil from "../components/ItensNavbarPerfil"
@@ -8,6 +8,9 @@ import CertificadosPerfil from "../components/CertificadosPerfil"
 import ImgEdu from '../assets/Edu.png'
 
 const SearchModules = () => {
+    const location = useLocation();
+    const user = location.state;
+    console.log(user)
     return (
         <>
 
@@ -30,9 +33,9 @@ const SearchModules = () => {
                 >
                     <CaracteristicasPerfil
                         img={ImgEdu}
-                        nome="Edu Cação"
-                        idade="Até 35 anos"
-                        email="Educacao@CodeOcean.com"
+                        nome={user.username}
+                        email={user.email}
+                        contato={user.telefone}
                     />
 
                 </div>

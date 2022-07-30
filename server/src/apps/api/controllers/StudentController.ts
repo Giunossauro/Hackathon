@@ -40,10 +40,11 @@ export class StudentController {
 	};
 
 	getStudentsByName = async (req: Request, res: Response, _next: NextFunction) => {
-		const { query } = req.params;
+		const { query } = req.query;
+		console.log(query)
 
 		if (query) {
-			const result = await this.#service.getStudentsByName(query);
+			const result = await this.#service.getStudentsByName(query.toString());
 
 			return res.status(result.status).json({
 				result: result.msg
@@ -53,16 +54,16 @@ export class StudentController {
 	};
 
 	getStudentByEmail = async (req: Request, res: Response, _next: NextFunction) => {
-		const { query } = req.params;
+		const { query } = req.query;
 
 		if (query) {
-			const emailPattern = query.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g);
+			const emailPattern = query.toString().match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g);
 
 			if (!emailPattern) {
 				return res.status(400).json({ result: "ERRO: Padrão de email inválido." });
 			}
 
-			const result = await this.#service.getStudentByEmail(query);
+			const result = await this.#service.getStudentByEmail(query.toString());
 
 			return res.status(result.status).json({
 				result: result.msg
